@@ -18,26 +18,34 @@ class Puzzle
 
   public function __construct($puzzleSize)
   {
-      for ($count = 1; $count <= $puzzleSize; $count++) {
-          $this->tiles[] = $count;
-          $this->solution[] = $count;
-      }
+      $this->checkIsSquare($puzzleSize);
+
+      $this->tiles = range(1, $puzzleSize);
+      $this->solution = range(1, $puzzleSize);
       shuffle($this->tiles);
 
       $this->puzzleSize = $puzzleSize;
       $this->dimension = sqrt($puzzleSize);
 
-      $count = 0;
-      while ($count < $this->dimension) {
-        $count++;
-        $puzzleRow = array_fill(0, $this->dimension, 1);
-        if ($count == $this->dimension) $puzzleRow[$count - 1] = 0;
-        $this->puzzle[] = $puzzleRow;
+      foreach (range(1, 3) as $x) {
+          $puzzleRow = array_fill(0, $this->dimension, 1);
+          if ($x == $this->dimension) $puzzleRow[$x - 1] = 0;
+          $this->puzzle[] = $puzzleRow;
       }
 
       $this->puzzleMatrix = new NumArray(
           $this->puzzle
       );
+  }
+
+  protected function checkIsSquare(int $puzzleSize)
+  {
+      $squareRootOfPuzzleSize = 0 + sqrt($puzzleSize);
+      $remainder = fmod($squareRootOfPuzzleSize, 1);
+
+      if ($remainder !== 0.0) {
+          throw new \Exception("Puzzles must be a square, sorry bruh!");
+      }
   }
 
   public function move($from, $to)
