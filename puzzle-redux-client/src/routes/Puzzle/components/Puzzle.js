@@ -50,8 +50,7 @@ class Puzzle extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to the Panda Puzzle</h2>
+          <h2>The Panda Puzzle</h2>
         </div>
         <p className="App-intro">
           Click a square to move from, then click a square to move to
