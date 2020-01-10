@@ -1,0 +1,59 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.Puzzle {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.PuzzleContainer {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.PuzzleBlock {
+  flex: 0 0 33%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.PuzzleBlock:before {
+  content: '';
+  display: table;
+  padding-top: 100%;
+}
+
+.PuzzleBlockInner {
+  flex-grow: 1;
+  border: 1px solid #333;
+  background: url('http://localhost:3000/panda.jpeg') var(--x);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -2px;
+}
+
+[data-puzzle-index="0"] { --x: 0% 0%}
+[data-puzzle-index="1"] { --x: 50% 0%}
+[data-puzzle-index="2"] { --x: 100% 0%}
+[data-puzzle-index="3"] { --x: 0% 50%}
+[data-puzzle-index="4"] { --x: 50% 50%}
+[data-puzzle-index="5"] { --x: 100% 50%}
+[data-puzzle-index="6"] { --x: 0% 100%}
+[data-puzzle-index="7"] { --x: 50% 100%}
+[data-puzzle-index="8"] { --x: 100% 100%}
