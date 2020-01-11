@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg'
 import './Puzzle.scss'
-import { compose, curryN, forEach, isNil, multiply, partial, times, unapply } from 'ramda'
+import { compose, curryN, forEach, forEachObjIndexed, isNil, multiply, partial, times, unapply } from 'ramda'
 
 let performMoveFrom
 function moveBlockHandler(moveBlockAction, event) {
@@ -21,9 +21,9 @@ function moveBlockHandler(moveBlockAction, event) {
   }
 }
 
-function *puzzleBlock(moveBlockAction, x) {
+function *puzzleBlock(moveBlockAction, x, key) {
     yield <div onClick={partial(moveBlockHandler, [moveBlockAction])}
-               data-outer-puzzle-index={x}
+               data-outer-puzzle-index={key}
                className="PuzzleBlock">
              <div data-puzzle-index={x} className="PuzzleBlockInner">{ x }</div>
           </div>;
@@ -32,7 +32,7 @@ function *puzzleBlock(moveBlockAction, x) {
 
 class Puzzle extends Component {
   componentDidMount () {
-    this.props.startPuzzle()
+    return this.props.startPuzzle()
   }
 
   render () {
@@ -45,9 +45,9 @@ class Puzzle extends Component {
     //   )(this.props.dimension)
     // )
 
-    forEach((x) => {
+    forEachObjIndexed((x, key) => {
       puzzleBlocks.push(
-        puzzleBlock(this.props.moveBlock, x)
+        puzzleBlock(this.props.moveBlock, x, key)
       )
     })(this.props.puzzleList)
 

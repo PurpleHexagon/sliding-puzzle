@@ -48,22 +48,22 @@
   margin: -2px;
 }
 
-[data-outer-puzzle-index="0"] { order: 0; }
-[data-outer-puzzle-index="1"] { order: 1; }
-[data-outer-puzzle-index="2"] { order: 2; }
-[data-outer-puzzle-index="3"] { order: 3; }
-[data-outer-puzzle-index="4"] { order: 4; }
-[data-outer-puzzle-index="5"] { order: 5; }
-[data-outer-puzzle-index="6"] { order: 6; }
-[data-outer-puzzle-index="7"] { order: 7; }
-[data-outer-puzzle-index="8"] { order: 8; }
+[data-outer-puzzle-index="1"] { order: 0; }
+[data-outer-puzzle-index="2"] { order: 1; }
+[data-outer-puzzle-index="3"] { order: 2; }
+[data-outer-puzzle-index="4"] { order: 3; }
+[data-outer-puzzle-index="5"] { order: 4; }
+[data-outer-puzzle-index="6"] { order: 5; }
+[data-outer-puzzle-index="7"] { order: 6; }
+[data-outer-puzzle-index="8"] { order: 7; }
+[data-outer-puzzle-index="9"] { order: 8; }
 
-[data-puzzle-index="0"] { --x: 0% 0%; }
-[data-puzzle-index="1"] { --x: 50% 0%; }
-[data-puzzle-index="2"] { --x: 100% 0%; }
-[data-puzzle-index="3"] { --x: 0% 50%; }
-[data-puzzle-index="4"] { --x: 50% 50%; }
-[data-puzzle-index="5"] { --x: 100% 50%; }
-[data-puzzle-index="6"] { --x: 0% 100%; }
-[data-puzzle-index="7"] { --x: 50% 100%; }
-[data-puzzle-index="8"] { --x: 100% 100%; }
+[data-puzzle-index="1"] { --x: 0% 0%; }
+[data-puzzle-index="2"] { --x: 50% 0%; }
+[data-puzzle-index="3"] { --x: 100% 0%; }
+[data-puzzle-index="4"] { --x: 0% 50%; }
+[data-puzzle-index="5"] { --x: 50% 50%; }
+[data-puzzle-index="6"] { --x: 100% 50%; }
+[data-puzzle-index="7"] { --x: 0% 100%; }
+[data-puzzle-index="8"] { --x: 50% 100%; }
+[data-puzzle-index="9"] { --x: 100% 100%; }
