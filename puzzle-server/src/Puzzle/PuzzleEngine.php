@@ -84,26 +84,12 @@ class PuzzleEngine
     }
 
     /**
-     * Check if puzzleSize is a square number and throw exception if not
-     * @param  int    $puzzleSize
-     * @throws LogicException
+     * Return the tiles
+     * @return array
      */
-    protected function ensureIsSquareGuard(int $puzzleSize)
+    public function getTiles()
     {
-        $squareRootOfPuzzleSize = sqrt($puzzleSize);
-        $remainder = fmod($squareRootOfPuzzleSize, 1);
-
-        // $remainder will be set to float(0) if the puzzle size is a square number
-        // and want to use strict type checking
-        if ($remainder !== 0.0) {
-            throw new LogicException(
-                sprintf(
-                    "%s::%s - Puzzles must be a square, please provide a valid puzzle size",
-                    __CLASS__,
-                    __FUNCTION__
-                )
-            );
-        }
+        return $this->tiles;
     }
 
     /**
@@ -129,6 +115,29 @@ class PuzzleEngine
         }
 
         return $newPuzzleMatrix;
+    }
+
+    /**
+     * Check if puzzleSize is a square number and throw exception if not
+     * @param  int    $puzzleSize
+     * @throws LogicException
+     */
+    protected function ensureIsSquareGuard(int $puzzleSize)
+    {
+        $squareRootOfPuzzleSize = sqrt($puzzleSize);
+        $remainder = fmod($squareRootOfPuzzleSize, 1);
+
+        // $remainder will be set to float(0) if the puzzle size is a square number
+        // and want to use strict type checking
+        if ($remainder !== 0.0) {
+            throw new LogicException(
+                sprintf(
+                    "%s::%s - Puzzles must be a square, please provide a valid puzzle size",
+                    __CLASS__,
+                    __FUNCTION__
+                )
+            );
+        }
     }
 
     /**

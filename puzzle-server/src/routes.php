@@ -9,6 +9,7 @@ $app->get('/start-puzzle', function ($request, $response, $args) {
         $puzzle = new PuzzleEngine(9);
         $this->session->set('puzzle', $puzzle);
     }
+
     // $isSolved = false;
     //
     // while ($puzzle->getIsSolved() === false) {
@@ -17,8 +18,8 @@ $app->get('/start-puzzle', function ($request, $response, $args) {
     //   $isSolved = $puzzle->move($from, $to);
     // }
 
-    // Render index view
-    return json_encode(['test']);
+    // Return the tiles to display the initial mixed up puzzle blocks on load
+    return json_encode(['tiles' => $puzzle->getTiles()]);
 });
 
 $app->post('/move', function ($request, $response, $args) {
