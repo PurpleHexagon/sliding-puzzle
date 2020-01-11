@@ -19,7 +19,6 @@ function moveBlockHandler(moveBlockAction, event) {
     )
     performMoveFrom = undefined
   }
-
 }
 
 function *puzzleBlock(moveBlockAction, x) {
@@ -31,7 +30,11 @@ function *puzzleBlock(moveBlockAction, x) {
 }
 
 class Puzzle extends Component {
-  render() {
+  componentDidMount () {
+    this.props.startPuzzle()
+  }
+
+  render () {
     console.log(this.props.puzzleList)
     const puzzleBlocks = []
     // puzzleBlocks.push(
@@ -66,13 +69,14 @@ class Puzzle extends Component {
 }
 
 Puzzle.propTypes = {
-    dimension: PropTypes.number,
-    puzzleList: PropTypes.array,
-    moveBlock : PropTypes.func.isRequired,
+  dimension: PropTypes.number,
+  puzzleList: PropTypes.array,
+  moveBlock : PropTypes.func.isRequired,
+  startPuzzle : PropTypes.func.isRequired
 }
 
 Puzzle.defaultProps = {
-    dimension: 3,
+  dimension: 3
 }
 
 export default Puzzle

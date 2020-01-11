@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { moveBlock } from '../modules/Puzzle'
+import { moveBlock, startPuzzle } from '../modules/Puzzle'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -13,11 +13,11 @@ import Puzzle from '../components/Puzzle'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
+  startPuzzle,
   moveBlock
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     puzzleList : state.puzzle
   }
