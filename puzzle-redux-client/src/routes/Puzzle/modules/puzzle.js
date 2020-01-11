@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { merge } from 'ramda'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -15,6 +17,12 @@ export const START_PUZZLE = 'START_PUZZLE';
 export const startPuzzle = () => {
   return (dispatch, getState) => {
     return axios.get('http://0.0.0.0:8080/start-puzzle')
+    .then(function (response) {
+      return dispatch({
+        type    : START_PUZZLE,
+        payload : response.data
+      })
+    })
   }
 }
 
@@ -50,15 +58,15 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [START_PUZZLE] : (state, action) => {
-    console.log(action);
-    return state
+    console.log(state)
+    return merge(state, action.payload)
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const initialState = { tiles: [0, 1, 2, 3, 4, 5, 6, 7, 8] };
 export default function puzzleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 

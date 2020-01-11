@@ -19,7 +19,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
   return {
-    puzzleList : state.puzzle
+    puzzleList : state.puzzle.tiles
   }
 }
 
