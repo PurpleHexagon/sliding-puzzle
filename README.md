@@ -26,6 +26,9 @@ Start React:
 - [ ] Use JWT so more than one puzzle can be played at once
 - [ ] Create Tile component 
 - [ ] Create home screen
+- [ ] Add timer
+- [ ] Add complete message
+- [ ] Add Score board
 - [ ] Design and styles
 - [ ] Add Unit Tests
 - [ ] Dockerize and write commands for managing
