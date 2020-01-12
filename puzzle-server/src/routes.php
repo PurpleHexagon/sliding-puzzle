@@ -4,10 +4,15 @@ use Ramsey\Uuid\Uuid;
 // Routes
 //
 $app->get('/start-puzzle', function ($request, $response, $args) {
-    $exists = $this->session->exists('puzzle');
+    $cache = $this->get('cache');
+    $puzzleCacheItem = $cache->getItem('puzzle');
+    $exists = false;
     if ($exists === false) {
         $puzzle = new PuzzleEngine(9);
-        $this->session->set('puzzle', $puzzle);
+        $puzzleCacheItem->set($puzzle);
+        $cache->save($puzzleCacheItem);
+    } else {
+
     }
 
     // $isSolved = false;
@@ -26,9 +31,14 @@ $app->post('/move', function ($request, $response, $args) {
     $uuid = Uuid::uuid4();
 
     $cache = $this->get('cache');
-    $numProducts = $cache->getItem('stats.num_products');
+    $puzzleCacheItem = $cache->getItem('puzzle');
+    $exists = $puzzleCacheItem->isHit();
 
-    $puzzle = $this->session->get('puzzle');
+    if ($exists === false) {
+        return json_encode([]);
+    }
+
+    $puzzle = $puzzleCacheItem->get();
 
     if ($puzzle === null) {
         return json_encode(['test']);
@@ -37,9 +47,11 @@ $app->post('/move', function ($request, $response, $args) {
     $body = (string) $request->getBody();
     $parsedBody = json_decode($body, true);
     $move = $parsedBody['moveArray'];
+    $log = $this->get('logger');
     $isSolved = $puzzle->move(...$move);
+    $cache->save($puzzleCacheItem);
 
-    return json_encode(['isSolved' => $isSolved]);
+    return json_encode(['isSolved' => $isSolved, 'tiles' => $puzzle->getTiles()]);
 });
 
 $app->get('/end-puzzle', function ($request, $response, $args) {

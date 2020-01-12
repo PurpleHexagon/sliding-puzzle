@@ -93,6 +93,15 @@ class PuzzleEngine
     }
 
     /**
+     * Return the tiles
+     * @return array
+     */
+    public function getPuzzleMatrix()
+    {
+        return $this->puzzleMatrix;
+    }
+
+    /**
      * Update the puzzle matrix and tile properties which represents a move
      * @param  int      $from
      * @param  int      $to

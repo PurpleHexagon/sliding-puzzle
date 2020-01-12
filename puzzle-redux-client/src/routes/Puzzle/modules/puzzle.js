@@ -41,7 +41,7 @@ export const moveBlock = (moveArray) => {
     .then(function (response) {
       return dispatch({
         type    : MOVE,
-        payload : moveArray
+        payload : response.data
       })
     })
     .catch(function (error) {
@@ -63,7 +63,7 @@ const ACTION_HANDLERS = {
     return merge(state, action.payload)
   },
   [MOVE] : (state, action) => {
-    return state
+    return merge(state, action.payload)
   }
 }
 

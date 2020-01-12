@@ -11,11 +11,11 @@ function moveBlockHandler(moveBlockAction, event) {
       moveBlockAction(fromTo)
     }))
     performMoveFrom = performMove(
-      event.target.attributes.getNamedItem('data-puzzle-index').value
+      parseInt(event.currentTarget.attributes.getNamedItem('data-outer-puzzle-index').value, 10) + 1
     )
   } else {
     const result = performMoveFrom(
-      event.target.attributes.getNamedItem('data-puzzle-index').value
+      parseInt(event.currentTarget.attributes.getNamedItem('data-outer-puzzle-index').value, 10) + 1
     )
     performMoveFrom = undefined
   }
