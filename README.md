@@ -31,4 +31,6 @@ Start React:
 - [ ] Dockerize and write commands for managing
 - [ ] Allow for size of puzzle to be selected
 - [ ] Allow for users to use their own images
+- [ ] Create cloud production env
+- [ ] Add Travis CI pipeline
 
