@@ -39,7 +39,6 @@ class Puzzle extends Component {
   }
 
   render () {
-    console.log(this.props.puzzleList)
     const puzzleBlocks = []
     // puzzleBlocks.push(
     //   compose(
@@ -62,6 +61,9 @@ class Puzzle extends Component {
         <p className="App-intro">
           Click a square to move it to the empty square.
         </p>
+        <div>
+          Moves: { this.props.moveCount }
+        </div>
         <div className="Puzzle">
           <div className="PuzzleContainer">
             { puzzleBlocks }
@@ -75,6 +77,7 @@ class Puzzle extends Component {
 Puzzle.propTypes = {
   dimension: PropTypes.number,
   puzzleList: PropTypes.array,
+  moveCount: PropTypes.number,
   moveBlock : PropTypes.func.isRequired,
   startPuzzle : PropTypes.func.isRequired
 }

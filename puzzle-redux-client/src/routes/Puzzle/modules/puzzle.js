@@ -6,6 +6,7 @@ import { merge } from 'ramda'
 // ------------------------------------
 export const START_PUZZLE = 'START_PUZZLE';
 export const MOVE = 'MOVE';
+export const MOVE_COUNT = 'MOVE_COUNT';
 
 // ------------------------------------
 // Actions
@@ -39,9 +40,14 @@ export const moveBlock = (moveArray) => {
         }
       })
     .then(function (response) {
-      return dispatch({
+      dispatch({
         type    : MOVE,
         payload : response.data
+      })
+
+      dispatch({
+        type    : MOVE_COUNT,
+        payload: {}
       })
     })
     .catch(function (error) {
@@ -64,13 +70,16 @@ const ACTION_HANDLERS = {
   },
   [MOVE] : (state, action) => {
     return merge(state, action.payload)
+  },
+  [MOVE_COUNT] : (state, action) => {
+    return merge(state, { moveCount: state.moveCount + 1 })
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { tiles: [] };
+const initialState = { tiles: [], moveCount: 0 };
 export default function puzzleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
