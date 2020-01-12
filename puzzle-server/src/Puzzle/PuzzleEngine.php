@@ -122,6 +122,7 @@ class PuzzleEngine
      */
     public function move(int $from, int $to): NumArray
     {
+        $this->adjacestTileGuard($from, $to);
         $move = $this->createMoveMatrix($from, $to);
         $newPuzzleMatrix = $this->puzzleMatrix->add($move);
         $this->ensureMoveValid($newPuzzleMatrix->getData());
@@ -173,7 +174,7 @@ class PuzzleEngine
             if ($item === 2 || $item === -1) {
                 throw new RuntimeException(
                     sprintf(
-                        "%s::%s - Invalid move made, please ensure tiles are orthogonally adjacent",
+                        "%s::%s - Invalid move made, cannot move to occupied square",
                         __CLASS__,
                         __FUNCTION__
                     )
@@ -243,31 +244,16 @@ class PuzzleEngine
      * @param  array $toPosition
      * @throws RuntimeException
      */
-    protected function adjacestTileGuard(array $fromPosition, array $toPosition)
+    protected function adjacestTileGuard(int $fromPosition, int $toPosition)
     {
-        // If move is in the same row the position indexes should only be one apart
-        if ($fromPosition[0] === $toPosition[0]) {
-            if (abs($fromPosition[1] - $toPosition[1]) !== 1) {
-                throw new RuntimeException(
-                    sprintf(
-                        "%s::%s - Invalid move made, those squares arent together!",
-                        __CLASS__,
-                        __FUNCTION__
-                    )
-                );
-            }
-        }
-
-        if (abs($fromPosition[0] - $toPosition[0]) === 1) {
-            if ($fromPosition[1] !== $toPosition[1]) {
-                throw new RuntimeException(
-                    sprintf(
-                        "%s::%s - Invalid move made, those squares arent together!",
-                        __CLASS__,
-                        __FUNCTION__
-                    )
-                );
-            }
+        if (in_array(abs($toPosition - $fromPosition), [1, 3]) === false) {
+            throw new RuntimeException(
+                sprintf(
+                    "%s::%s - Invalid move made, please ensure tiles are orthogonally adjacent.",
+                    __CLASS__,
+                    __FUNCTION__
+                )
+            );
         }
     }
 
