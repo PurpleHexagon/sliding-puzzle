@@ -25,7 +25,7 @@ function *puzzleBlock(moveBlockAction, x, key) {
     yield <div onClick={partial(moveBlockHandler, [moveBlockAction])}
                data-outer-puzzle-index={key}
                className="PuzzleBlock">
-             <div data-puzzle-index={x} className="PuzzleBlockInner">{ x }</div>
+             <div data-puzzle-index={x} className="PuzzleBlockInner"></div>
           </div>;
     // x++
 }

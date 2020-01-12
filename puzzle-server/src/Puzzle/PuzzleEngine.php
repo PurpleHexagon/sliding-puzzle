@@ -68,6 +68,19 @@ class PuzzleEngine
         $this->ensureIsSquareGuard($puzzleSize);
         $this->tiles = $this->solution = range(1, $puzzleSize);
         shuffle($this->tiles);
+        $lastTile = $this->tiles[8];
+        $this->tiles = array_map(
+            function ($value) use ($lastTile) {
+                if ($value === 9) {
+                    return $lastTile;
+                }
+
+                return $value;
+            },
+            $this->tiles
+        );
+
+        $this->tiles[8] = 9;
 
         $this->puzzleSize = $puzzleSize;
         $this->dimension = (int) sqrt($puzzleSize);
