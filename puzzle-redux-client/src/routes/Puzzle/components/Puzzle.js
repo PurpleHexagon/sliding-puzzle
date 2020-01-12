@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg'
 import './Puzzle.scss'
-import { compose, curryN, forEach, forEachObjIndexed, isNil, multiply, partial, times, unapply } from 'ramda'
+import { compose, curryN, equals, findIndex, forEach, forEachObjIndexed, isNil, multiply, partial, propEq, times, unapply } from 'ramda'
 
 let performMoveFrom
-function moveBlockHandler(moveBlockAction, event) {
+function moveBlockHandler (moveBlockAction, puzzleList, event) {
   if (isNil(performMoveFrom)) {
     const performMove = curryN(2, unapply(function _performMove(fromTo) {
       moveBlockAction(fromTo)
@@ -13,16 +13,19 @@ function moveBlockHandler(moveBlockAction, event) {
     performMoveFrom = performMove(
       parseInt(event.currentTarget.attributes.getNamedItem('data-outer-puzzle-index').value, 10) + 1
     )
+    const emptyTileIndex = findIndex(equals(9))(puzzleList);
+    performMoveFrom(parseInt(emptyTileIndex, 10) + 1);
+    performMoveFrom = undefined;
   } else {
-    const result = performMoveFrom(
+    performMoveFrom(
       parseInt(event.currentTarget.attributes.getNamedItem('data-outer-puzzle-index').value, 10) + 1
     )
     performMoveFrom = undefined
   }
 }
 
-function *puzzleBlock(moveBlockAction, x, key) {
-    yield <div onClick={partial(moveBlockHandler, [moveBlockAction])}
+function *puzzleBlock(moveBlockAction, puzzleList, x, key) {
+    yield <div onClick={partial(moveBlockHandler, [moveBlockAction, puzzleList])}
                data-outer-puzzle-index={key}
                className="PuzzleBlock">
              <div data-puzzle-index={x} className="PuzzleBlockInner"></div>
@@ -47,7 +50,7 @@ class Puzzle extends Component {
 
     forEachObjIndexed((x, key) => {
       puzzleBlocks.push(
-        puzzleBlock(this.props.moveBlock, x, key)
+        puzzleBlock(this.props.moveBlock, this.props.puzzleList, x, key)
       )
     })(this.props.puzzleList)
 
@@ -57,7 +60,7 @@ class Puzzle extends Component {
           <h2>The Panda Puzzle</h2>
         </div>
         <p className="App-intro">
-          Click a square to move from, then click a square to move to
+          Click a square to move it to the empty square.
         </p>
         <div className="Puzzle">
           <div className="PuzzleContainer">
