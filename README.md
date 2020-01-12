@@ -28,6 +28,7 @@ Start React:
 - [ ] Create home screen
 - [ ] Design and styles
 - [ ] Add Unit Tests
+- [ ] Dockerize and write commands for managing
 - [ ] Allow for size of puzzle to be selected
 - [ ] Allow for users to use their own images
 
