@@ -70,7 +70,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { tiles: [1, 2, 3, 4, 5, 6, 7, 8, 9] };
+const initialState = { tiles: [] };
 export default function puzzleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type];
 
