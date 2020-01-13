@@ -124,9 +124,9 @@ class PuzzleEngine
      * Update the puzzle matrix and tile properties which represents a move
      * @param  int      $from
      * @param  int      $to
-     * @return NumArray
+     * @return bool
      */
-    public function move(int $from, int $to): NumArray
+    public function move(int $from, int $to): bool
     {
         $this->adjacestTileGuard($from, $to);
         $move = $this->createMoveMatrix($from, $to);
@@ -141,9 +141,11 @@ class PuzzleEngine
 
         if ($this->tiles === $this->solution) {
             $this->isSolved = true;
+        } else {
+            $this->isSolved = false;
         }
 
-        return $newPuzzleMatrix;
+        return $this->isSolved;
     }
 
     /**
