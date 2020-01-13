@@ -24,12 +24,12 @@ Start React:
 ## Todo:
 
 - [x] Use JWT so more than one puzzle can be played at once
-- [ ] Create Tile component 
-- [ ] Create home screen
-- [ ] Add complete message
 - [ ] Add timer
+- [ ] Add complete message
+- [ ] Create Tile component 
 - [ ] Design and styles
 - [ ] Add Unit Tests
+- [ ] Create home screen
 - [ ] Dockerize and write commands for managing
 - [ ] Add Score board
 - [ ] Allow for size of puzzle to be selected
