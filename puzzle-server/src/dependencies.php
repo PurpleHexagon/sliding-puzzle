@@ -28,3 +28,8 @@ $container['cache'] = function ($c) {
     $cache = new RedisAdapter(RedisAdapter::createConnection('redis://localhost'));
     return $cache;
 };
+
+$container['jwt'] = function ($c) {
+    $jwtService = new \PurpleHexagon\Services\Auth\JwtService();
+    return $jwtService;
+};

@@ -1,12 +1,16 @@
 <?php
 use PurpleHexagon\Services\Puzzle\PuzzleEngine;
-use Ramsey\Uuid\Uuid;
 
 // Routes
 //
 $app->get('/start-puzzle', function ($request, $response, $args) {
     $cache = $this->get('cache');
-    $puzzleCacheItem = $cache->getItem('puzzle');
+
+    /** @var \PurpleHexagon\Services\Auth\JwtService $jwtService */
+    $jwtService = $this->get('jwt');
+    $token = $jwtService->mintToken();
+
+    $puzzleCacheItem = $cache->getItem('puzzle_' . $token);
     $exists = false;
     if ($exists === false) {
         $puzzle = new PuzzleEngine(9);
@@ -16,14 +20,18 @@ $app->get('/start-puzzle', function ($request, $response, $args) {
 
     $now = new \DateTimeImmutable();
     // Return the tiles to display the initial mixed up puzzle blocks on load
-    return json_encode(['tiles' => $puzzle->getTiles(), 'started' => $now->format(DATE_RFC3339_EXTENDED)]);
+    return json_encode([
+        'tiles' => $puzzle->getTiles(),
+        'started' => $now->format(DATE_RFC3339_EXTENDED),
+        'token' => $token
+    ]);
 });
 
 $app->post('/move', function ($request, $response, $args) {
-    $uuid = Uuid::uuid4();
-
     $cache = $this->get('cache');
-    $puzzleCacheItem = $cache->getItem('puzzle');
+    $body = (string) $request->getBody();
+    $parsedBody = json_decode($body, true);
+    $puzzleCacheItem = $cache->getItem('puzzle_' . $parsedBody['token']);
     $exists = $puzzleCacheItem->isHit();
 
     if ($exists === false) {
@@ -36,8 +44,6 @@ $app->post('/move', function ($request, $response, $args) {
         return json_encode(['test']);
     }
 
-    $body = (string) $request->getBody();
-    $parsedBody = json_decode($body, true);
     $move = $parsedBody['moveArray'];
     $log = $this->get('logger');
     $isSolved = $puzzle->move(...$move);

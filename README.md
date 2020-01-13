@@ -23,7 +23,7 @@ Start React:
 
 ## Todo:
 
-- [ ] Use JWT so more than one puzzle can be played at once
+- [x] Use JWT so more than one puzzle can be played at once
 - [ ] Create Tile component 
 - [ ] Create home screen
 - [ ] Add complete message

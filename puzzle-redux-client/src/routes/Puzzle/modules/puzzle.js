@@ -30,9 +30,10 @@ export const startPuzzle = () => {
 
 export const moveBlock = (moveArray) => {
   return (dispatch, getState) => {
+    const state = getState()
     return axios.post(
       'http://0.0.0.0:8080/move',
-      JSON.stringify({ moveArray }),
+      JSON.stringify({ moveArray, token: state.puzzle.token }),
       {
         headers: {
           'Content-Type': 'application/json',
