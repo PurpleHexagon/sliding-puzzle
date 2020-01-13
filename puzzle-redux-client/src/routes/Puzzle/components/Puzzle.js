@@ -56,6 +56,9 @@ class Puzzle extends Component {
         <div>
           Moves: { this.props.moveCount }
         </div>
+        <div>
+          Status: { this.props.isSolved ? 'Complete' : 'Incomplete' }
+        </div>
         <div className='Puzzle'>
           <div className='PuzzleContainer'>
             { puzzleBlocks }
@@ -69,6 +72,7 @@ class Puzzle extends Component {
 Puzzle.propTypes = {
   dimension: PropTypes.number,
   puzzleList: PropTypes.array,
+  isSolved: PropTypes.bool,
   moveCount: PropTypes.number,
   moveBlock : PropTypes.func.isRequired,
   startPuzzle : PropTypes.func.isRequired

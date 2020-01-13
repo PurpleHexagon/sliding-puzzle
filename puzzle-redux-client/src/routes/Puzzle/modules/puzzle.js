@@ -79,7 +79,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { tiles: [], moveCount: 0 }
+const initialState = { tiles: [], moveCount: 0, isSolved: false }
 export default function puzzleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

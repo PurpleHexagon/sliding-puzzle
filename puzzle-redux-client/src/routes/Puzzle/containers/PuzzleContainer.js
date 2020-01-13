@@ -20,7 +20,8 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => {
   return {
     puzzleList : state.puzzle.tiles,
-    moveCount : state.puzzle.moveCount
+    moveCount : state.puzzle.moveCount,
+    isSolved : state.puzzle.isSolved
   }
 }
 
