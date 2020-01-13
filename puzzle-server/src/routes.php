@@ -1,16 +1,18 @@
 <?php
 use PurpleHexagon\Services\Puzzle\PuzzleEngine;
+use Ramsey\Uuid\Uuid;
 
 // Routes
 //
 $app->get('/start-puzzle', function ($request, $response, $args) {
     $cache = $this->get('cache');
+    $uuid = Uuid::uuid4();
 
     /** @var \PurpleHexagon\Services\Auth\JwtService $jwtService */
     $jwtService = $this->get('jwt');
-    $token = $jwtService->mintToken();
+    $token = $jwtService->mintToken($uuid);
 
-    $puzzleCacheItem = $cache->getItem('puzzle_' . $token);
+    $puzzleCacheItem = $cache->getItem('puzzle_' . $uuid);
     $exists = false;
     if ($exists === false) {
         $puzzle = new PuzzleEngine(9);
@@ -31,7 +33,11 @@ $app->post('/move', function ($request, $response, $args) {
     $cache = $this->get('cache');
     $body = (string) $request->getBody();
     $parsedBody = json_decode($body, true);
-    $puzzleCacheItem = $cache->getItem('puzzle_' . $parsedBody['token']);
+
+    /** @var \PurpleHexagon\Services\Auth\JwtService $jwtService */
+    $jwtService = $this->get('jwt');
+    $token = $jwtService->decodeToken($parsedBody['token']);
+    $puzzleCacheItem = $cache->getItem('puzzle_' . $token->uuid);
     $exists = $puzzleCacheItem->isHit();
 
     if ($exists === false) {
