@@ -5,6 +5,12 @@ use LogicException;
 use RuntimeException;
 use NumPHP\Core\NumArray;
 
+/**
+ * Encapsulates logic for sliding puzzles
+ *
+ * Class PuzzleEngine
+ * @package PurpleHexagon\Services\Puzzle
+ */
 class PuzzleEngine
 {
     /**
