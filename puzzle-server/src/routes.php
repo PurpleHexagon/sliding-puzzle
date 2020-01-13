@@ -11,20 +11,11 @@ $app->get('/start-puzzle', function ($request, $response, $args) {
         $puzzle = new PuzzleEngine(9);
         $puzzleCacheItem->set($puzzle);
         $cache->save($puzzleCacheItem);
-    } else {
+    } 
 
-    }
-
-    // $isSolved = false;
-    //
-    // while ($puzzle->getIsSolved() === false) {
-    //   $from = readline("from: ");
-    //   $to = readline("to: ");
-    //   $isSolved = $puzzle->move($from, $to);
-    // }
-
+    $now = new \DateTimeImmutable();
     // Return the tiles to display the initial mixed up puzzle blocks on load
-    return json_encode(['tiles' => $puzzle->getTiles()]);
+    return json_encode(['tiles' => $puzzle->getTiles(), 'started' => $now->format(DATE_RFC3339_EXTENDED)]);
 });
 
 $app->post('/move', function ($request, $response, $args) {
