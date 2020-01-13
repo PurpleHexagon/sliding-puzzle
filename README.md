@@ -37,4 +37,5 @@ Start React:
 - [ ] Create cloud production env
 - [ ] Add Travis CI pipeline
 - [ ] Simplify PuzzleEngine logic by using matrix of tile indexes
+- [ ] Update Dependencies 
 

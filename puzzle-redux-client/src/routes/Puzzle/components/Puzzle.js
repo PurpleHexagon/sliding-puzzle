@@ -26,6 +26,7 @@ function moveBlockHandler (moveBlockAction, puzzleList, event) {
 
 function *puzzleBlock(moveBlockAction, puzzleList, x, key) {
     yield <div onClick={partial(moveBlockHandler, [moveBlockAction, puzzleList])}
+               key={key}
                data-outer-puzzle-index={key}
                className="PuzzleBlock">
              <div data-puzzle-index={x} className="PuzzleBlockInner"></div>
@@ -54,21 +55,21 @@ class Puzzle extends Component {
     })(this.props.puzzleList)
 
     return (
-      <div className="App">
-        <div className="App-header">
+      <div className='App'>
+        <div className='App-header'>
           <h2>The Panda Puzzle</h2>
         </div>
-        <p className="App-intro">
-          Click a square to move it to the empty square.
+        <p className='App-intro'>
+          Click a square adjacent to the empty square to move it.
         </p>
         <div>
           Moves: { this.props.moveCount }
         </div>
-        <div className="Puzzle">
-          <div className="PuzzleContainer">
-            { puzzleBlocks }
+          <div className='Puzzle'>
+            <div className='PuzzleContainer'>
+                { puzzleBlocks }
+            </div>
           </div>
-        </div>
       </div>
     )
   }
