@@ -11,7 +11,7 @@ $app->get('/start-puzzle', function ($request, $response, $args) {
         $puzzle = new PuzzleEngine(9);
         $puzzleCacheItem->set($puzzle);
         $cache->save($puzzleCacheItem);
-    } 
+    }
 
     $now = new \DateTimeImmutable();
     // Return the tiles to display the initial mixed up puzzle blocks on load

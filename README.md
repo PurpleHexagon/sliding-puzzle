@@ -36,4 +36,5 @@ Start React:
 - [ ] Allow for users to use their own images
 - [ ] Create cloud production env
 - [ ] Add Travis CI pipeline
+- [ ] Simplify PuzzleEngine logic by using matrix of tile indexes
 
