@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace PurpleHexagon\Puzzle;
+namespace PurpleHexagon\Services\Puzzle;
 
 use LogicException;
 use RuntimeException;

@@ -1,6 +1,7 @@
 <?php
-use PurpleHexagon\Puzzle\PuzzleEngine;
+use PurpleHexagon\Services\Puzzle\PuzzleEngine;
 use Ramsey\Uuid\Uuid;
+
 // Routes
 //
 $app->get('/start-puzzle', function ($request, $response, $args) {
