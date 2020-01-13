@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import logo from '../assets/logo.svg'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './Puzzle.scss'
-import { compose, curryN, equals, findIndex, forEach, forEachObjIndexed, isNil, multiply, partial, propEq, times, unapply } from 'ramda'
+import { curryN, equals, findIndex, forEachObjIndexed, isNil, partial, unapply } from 'ramda'
 
 let performMoveFrom
 function moveBlockHandler (moveBlockAction, puzzleList, event) {
   if (isNil(performMoveFrom)) {
-    const performMove = curryN(2, unapply(function _performMove(fromTo) {
+    const performMove = curryN(2, unapply(function _performMove (fromTo) {
       moveBlockAction(fromTo)
     }))
     performMoveFrom = performMove(
       parseInt(event.currentTarget.attributes.getNamedItem('data-outer-puzzle-index').value, 10) + 1
     )
-    const emptyTileIndex = findIndex(equals(9))(puzzleList);
-    performMoveFrom(parseInt(emptyTileIndex, 10) + 1);
-    performMoveFrom = undefined;
+    const emptyTileIndex = findIndex(equals(9))(puzzleList)
+    performMoveFrom(parseInt(emptyTileIndex, 10) + 1)
+    performMoveFrom = undefined
   } else {
     performMoveFrom(
       parseInt(event.currentTarget.attributes.getNamedItem('data-outer-puzzle-index').value, 10) + 1
@@ -24,14 +23,13 @@ function moveBlockHandler (moveBlockAction, puzzleList, event) {
   }
 }
 
-function *puzzleBlock(moveBlockAction, puzzleList, x, key) {
-    yield <div onClick={partial(moveBlockHandler, [moveBlockAction, puzzleList])}
-               key={key}
-               data-outer-puzzle-index={key}
-               className="PuzzleBlock">
-             <div data-puzzle-index={x} className="PuzzleBlockInner"></div>
-          </div>;
-    // x++
+function *puzzleBlock (moveBlockAction, puzzleList, x, key) {
+  yield <div onClick={partial(moveBlockHandler, [moveBlockAction, puzzleList])}
+    key={key}
+    data-outer-puzzle-index={key}
+    className='PuzzleBlock'>
+    <div data-puzzle-index={x} className='PuzzleBlockInner' />
+  </div>
 }
 
 class Puzzle extends Component {
@@ -41,13 +39,6 @@ class Puzzle extends Component {
 
   render () {
     const puzzleBlocks = []
-    // puzzleBlocks.push(
-    //   compose(
-    //     times(partial(puzzleBlock, [this.props.moveBlock])),
-    //     multiply(this.props.dimension)
-    //   )(this.props.dimension)
-    // )
-
     forEachObjIndexed((x, key) => {
       puzzleBlocks.push(
         puzzleBlock(this.props.moveBlock, this.props.puzzleList, x, key)
@@ -65,11 +56,11 @@ class Puzzle extends Component {
         <div>
           Moves: { this.props.moveCount }
         </div>
-          <div className='Puzzle'>
-            <div className='PuzzleContainer'>
-                { puzzleBlocks }
-            </div>
+        <div className='Puzzle'>
+          <div className='PuzzleContainer'>
+            { puzzleBlocks }
           </div>
+        </div>
       </div>
     )
   }

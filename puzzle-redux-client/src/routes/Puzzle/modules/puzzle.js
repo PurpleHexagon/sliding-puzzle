@@ -4,9 +4,9 @@ import { merge } from 'ramda'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const START_PUZZLE = 'START_PUZZLE';
-export const MOVE = 'MOVE';
-export const MOVE_COUNT = 'MOVE_COUNT';
+export const START_PUZZLE = 'START_PUZZLE'
+export const MOVE = 'MOVE'
+export const MOVE_COUNT = 'MOVE_COUNT'
 
 // ------------------------------------
 // Actions
@@ -65,7 +65,6 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [START_PUZZLE] : (state, action) => {
-    console.log(state)
     return merge(state, action.payload)
   },
   [MOVE] : (state, action) => {
@@ -79,9 +78,9 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = { tiles: [], moveCount: 0 };
+const initialState = { tiles: [], moveCount: 0 }
 export default function puzzleReducer (state = initialState, action) {
-  const handler = ACTION_HANDLERS[action.type];
+  const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
 }
