@@ -59,7 +59,7 @@ class Puzzle extends Component {
     })(this.props.puzzleList)
 
     return (
-      <div className='App'>
+      <div>
         <div>
           <h2>The Panda Puzzle</h2>
         </div>

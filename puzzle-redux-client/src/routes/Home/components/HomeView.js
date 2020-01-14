@@ -4,11 +4,15 @@ import './HomeView.scss'
 
 export const HomeView = () => (
   <div>
-    <h4>Welcome!</h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className='duck'
-      src={DuckImage} />
+    <h2>Home</h2>
+    <div>
+      <p>
+        Welcome to Sliding Puzzle, currently you can only play Panda Puzzle.
+      </p>
+      <p>
+        Soon you will be able to upload your own images and a scoreboard will be added.
+      </p>
+    </div>
   </div>
 )
 
