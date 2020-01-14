@@ -33,10 +33,23 @@ function *puzzleBlock (moveBlockAction, puzzleList, x, key) {
 }
 
 class Puzzle extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      runningTime: 0
+    }
+  }
   componentDidMount () {
     return this.props.startPuzzle()
+    .then(() => {
+      this.timer = setInterval(this.updateTimer.bind(this), 500)
+    })
   }
-
+  updateTimer () {
+    const startedDate = new Date(this.props.started)
+    this.setState({ runningTime: parseInt(Math.abs(new Date() - startedDate) / 1000, 10) })
+  }
   render () {
     const puzzleBlocks = []
     forEachObjIndexed((x, key) => {
@@ -44,9 +57,6 @@ class Puzzle extends Component {
         puzzleBlock(this.props.moveBlock, this.props.puzzleList, x, key)
       )
     })(this.props.puzzleList)
-
-    const startedDate = new Date(this.props.started)
-    const runningTime = Math.abs(new Date() - startedDate) / 1000
 
     return (
       <div className='App'>
@@ -63,7 +73,7 @@ class Puzzle extends Component {
           Status: { this.props.isSolved ? 'Complete' : 'Incomplete' }
         </div>
         <div>
-          Running Time: { runningTime } Seconds
+          Running Time: { this.state.runningTime } Seconds
         </div>
         <div className={'Puzzle ' + ( this.props.isSolved ? 'Complete' : 'Incomplete')}>
           <div className='PuzzleContainer'>
