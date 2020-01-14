@@ -2,6 +2,8 @@
 
 Small web-based application for sliding puzzles.
 
+The frontend application is a React JS SPA using Redux. The backend is written in PHP Slim framework. 
+
 ## Development Commands
 
 Use these commands until a more robust local environment has been built
