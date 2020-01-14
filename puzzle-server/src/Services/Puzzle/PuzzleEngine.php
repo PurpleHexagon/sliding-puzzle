@@ -128,7 +128,6 @@ class PuzzleEngine
      */
     public function move(int $from, int $to): bool
     {
-        $this->adjacestTileGuard($from, $to);
         $move = $this->createMoveMatrix($from, $to);
         $newPuzzleMatrix = $this->puzzleMatrix->add($move);
         $this->ensureMoveValid($newPuzzleMatrix->getData());
@@ -228,6 +227,9 @@ class PuzzleEngine
         $fromPosition = $this->getPosition($from);
         $toPosition = $this->getPosition($to);
 
+        $this->adjacestTileGuard($fromPosition, $toPosition);
+
+
         // Iterate by demension to generate each puzzle row, check when
         // the iteration is for a row that has been updated and then
         // set the correct element/s in row for from and to move
@@ -252,12 +254,39 @@ class PuzzleEngine
      * @param  array $toPosition
      * @throws RuntimeException
      */
-    protected function adjacestTileGuard(int $fromPosition, int $toPosition)
+    protected function adjacestTileGuard(array $fromPosition, array $toPosition)
     {
-        if (in_array(abs($toPosition - $fromPosition), [1, 3]) === false) {
+        // If move is in the same row the position indexes should only be one apart
+        if ($fromPosition[0] === $toPosition[0]) {
+            if (abs($fromPosition[1] - $toPosition[1]) !== 1) {
+                throw new RuntimeException(
+                    sprintf(
+                        "%s::%s - Invalid move made, those squares arent together!",
+                        __CLASS__,
+                        __FUNCTION__
+                    )
+                );
+            }
+        }
+
+        // If move it in adjacent row then column permissions must be the same
+        if (abs($fromPosition[0] - $toPosition[0]) === 1) {
+            if ($fromPosition[1] !== $toPosition[1]) {
+                throw new RuntimeException(
+                    sprintf(
+                        "%s::%s - Invalid move made, those squares arent together!",
+                        __CLASS__,
+                        __FUNCTION__
+                    )
+                );
+            }
+        }
+
+        // If move is greater than one row apart then you can never do this
+        if (abs($fromPosition[0] - $toPosition[0]) > 1) {
             throw new RuntimeException(
                 sprintf(
-                    "%s::%s - Invalid move made, please ensure tiles are orthogonally adjacent.",
+                    "%s::%s - Invalid move made, those squares arent together!",
                     __CLASS__,
                     __FUNCTION__
                 )
