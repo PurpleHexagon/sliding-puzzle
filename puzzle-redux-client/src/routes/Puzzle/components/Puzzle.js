@@ -45,6 +45,9 @@ class Puzzle extends Component {
       )
     })(this.props.puzzleList)
 
+    const startedDate = new Date(this.props.started)
+    const runningTime = Math.abs(new Date() - startedDate) / 1000
+
     return (
       <div className='App'>
         <div className='App-header'>
@@ -58,6 +61,9 @@ class Puzzle extends Component {
         </div>
         <div>
           Status: { this.props.isSolved ? 'Complete' : 'Incomplete' }
+        </div>
+        <div>
+          Running Time: { runningTime } Seconds
         </div>
         <div className={'Puzzle ' + ( this.props.isSolved ? 'Complete' : 'Incomplete')}>
           <div className='PuzzleContainer'>
@@ -73,6 +79,7 @@ Puzzle.propTypes = {
   dimension: PropTypes.number,
   puzzleList: PropTypes.array,
   isSolved: PropTypes.bool,
+  started: PropTypes.string,
   moveCount: PropTypes.number,
   moveBlock : PropTypes.func.isRequired,
   startPuzzle : PropTypes.func.isRequired

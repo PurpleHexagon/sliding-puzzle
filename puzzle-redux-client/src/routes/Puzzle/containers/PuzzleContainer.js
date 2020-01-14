@@ -21,7 +21,8 @@ const mapStateToProps = (state) => {
   return {
     puzzleList : state.puzzle.tiles,
     moveCount : state.puzzle.moveCount,
-    isSolved : state.puzzle.isSolved
+    isSolved : state.puzzle.isSolved,
+    started : state.puzzle.started
   }
 }
 
