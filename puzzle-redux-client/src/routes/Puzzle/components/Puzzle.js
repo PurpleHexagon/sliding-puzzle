@@ -75,7 +75,7 @@ class Puzzle extends Component {
         <div>
           Running Time: { this.state.runningTime } Seconds
         </div>
-        <div className={'Puzzle ' + ( this.props.isSolved ? 'Complete' : 'Incomplete')}>
+        <div className={'Puzzle ' + (this.props.isSolved ? 'Complete' : 'Incomplete')}>
           <div className='PuzzleContainer'>
             { puzzleBlocks }
           </div>
