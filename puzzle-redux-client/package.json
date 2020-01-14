@@ -19,7 +19,8 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
-    "codecov": "cat coverage/*/lcov.info | codecov"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "test-unit": "./node_modules/mocha/bin/mocha --require babel-core/register src/**/__tests__/**/*.js"
   },
   "betterScripts": {
     "compile": {
@@ -117,7 +118,7 @@
   "devDependencies": {
     "babel-eslint": "^7.1.0",
     "babel-plugin-istanbul": "^3.0.0",
-    "chai": "^3.4.1",
+    "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "chai-enzyme": "^0.6.1",
     "cheerio": "^0.22.0",
@@ -137,12 +138,12 @@
     "karma-mocha-reporter": "^2.0.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-webpack-with-fast-source-maps": "^1.9.2",
-    "mocha": "^3.0.1",
+    "mocha": "^3.5.3",
     "nodemon": "^1.10.2",
     "phantomjs-prebuilt": "^2.1.12",
     "react-addons-test-utils": "^15.0.0",
     "redbox-react": "^1.2.10",
-    "sinon": "^1.17.5",
+    "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
