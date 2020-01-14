@@ -59,7 +59,7 @@ class Puzzle extends Component {
         <div>
           Status: { this.props.isSolved ? 'Complete' : 'Incomplete' }
         </div>
-        <div className='Puzzle'>
+        <div className={'Puzzle ' + ( this.props.isSolved ? 'Complete' : 'Incomplete')}>
           <div className='PuzzleContainer'>
             { puzzleBlocks }
           </div>

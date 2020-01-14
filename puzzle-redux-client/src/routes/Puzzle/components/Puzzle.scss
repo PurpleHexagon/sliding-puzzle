@@ -67,4 +67,7 @@
 [data-puzzle-index="6"] { --x: 100% 50%; }
 [data-puzzle-index="7"] { --x: 0% 100%; }
 [data-puzzle-index="8"] { --x: 50% 100%; }
-[data-puzzle-index="9"] { --x: 100% 100%; background: #eee; }
+[data-puzzle-index="9"] { --x: 100% 100%; }
+
+.Incomplete [data-puzzle-index="9"] { background: #eee; }
+.Complete [data-puzzle-index="9"] { background: url('http://localhost:3000/panda.jpeg') var(--x); }
