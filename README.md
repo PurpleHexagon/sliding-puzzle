@@ -24,7 +24,7 @@ Start React:
 ## Todo:
 
 - [x] Use JWT so more than one puzzle can be played at once
-- [ ] Add timer
+- [x] Add timer
 - [x] Add complete message
 - [ ] Create Tile component 
 - [ ] Design and styles
