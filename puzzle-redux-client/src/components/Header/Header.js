@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 import './Header.scss'
 
 export const Header = () => (
-  <div>
+  <div className='App-header'>
     <h1>Sliding Puzzle</h1>
     <IndexLink to='/' activeClassName='route--active'>
       Home

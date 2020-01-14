@@ -1,3 +1,7 @@
+.App h2 {
+  margin-top: 0;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -13,7 +17,7 @@
 .Puzzle {
   width: 200px;
   height: 200px;
-  margin: 0 auto;
+  margin: 2rem auto 0 auto;
 }
 
 .PuzzleContainer {

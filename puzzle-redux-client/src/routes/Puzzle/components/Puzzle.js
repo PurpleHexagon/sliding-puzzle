@@ -60,7 +60,7 @@ class Puzzle extends Component {
 
     return (
       <div className='App'>
-        <div className='App-header'>
+        <div>
           <h2>The Panda Puzzle</h2>
         </div>
         <p className='App-intro'>
