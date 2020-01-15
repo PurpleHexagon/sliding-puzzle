@@ -7,6 +7,7 @@ import { merge } from 'ramda'
 export const START_PUZZLE = 'START_PUZZLE'
 export const MOVE = 'MOVE'
 export const MOVE_COUNT = 'MOVE_COUNT'
+export const RESET_MOVE_COUNT = 'RESET_MOVE_COUNT'
 
 // ------------------------------------
 // Actions
@@ -15,6 +16,15 @@ export const MOVE_COUNT = 'MOVE_COUNT'
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk! */
+
+export const resetMoveCount = () => {
+  return (dispatch) => {
+    return dispatch({
+      type    : RESET_MOVE_COUNT,
+      payload : {}
+    })
+  }
+}
 
 export const startPuzzle = () => {
   return (dispatch, getState) => {
@@ -73,6 +83,9 @@ const ACTION_HANDLERS = {
   },
   [MOVE_COUNT] : (state, action) => {
     return merge(state, { moveCount: state.moveCount + 1 })
+  },
+  [RESET_MOVE_COUNT] : (state) => {
+    return merge(state, { moveCount: 0 })
   }
 }
 

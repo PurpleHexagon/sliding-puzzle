@@ -41,6 +41,7 @@ class Puzzle extends Component {
     }
   }
   componentDidMount () {
+    this.props.resetMoveCount()
     return this.props.startPuzzle()
     .then(() => {
       this.timer = setInterval(this.updateTimer.bind(this), 500)
@@ -92,7 +93,8 @@ Puzzle.propTypes = {
   started: PropTypes.string,
   moveCount: PropTypes.number,
   moveBlock : PropTypes.func.isRequired,
-  startPuzzle : PropTypes.func.isRequired
+  startPuzzle : PropTypes.func.isRequired,
+  resetMoveCount : PropTypes.func.isRequired
 }
 
 Puzzle.defaultProps = {
