@@ -118,4 +118,32 @@ class PuzzleEngineTest extends TestCase
     {
         $this->assertFalse($this->serviceUnderTest->getIsSolved(), "isSolved should be false");
     }
+
+    /**
+     * Given an instance of PuzzleEngine
+     * When move method is called with a valid to and from position 
+     * Then the tiles should switch place
+     */
+    public function testMoveToEmptyTileIsSuccessful()
+    {
+        $tiles = $this->serviceUnderTest->getTiles();
+        $tileIndexToMove = 5;
+        $toIndex = 8;
+        $tileToMove = $tiles[$tileIndexToMove];
+        $tileNine = $tiles[$toIndex];
+
+        $this->serviceUnderTest->move($tileIndexToMove + 1, $toIndex + 1);
+
+        $tilesAfterMove = $this->serviceUnderTest->getTiles();
+
+        $this->assertEquals(
+            $tileToMove,
+            $tilesAfterMove[$toIndex]
+        );
+
+        $this->assertEquals(
+            $tileNine,
+            $tilesAfterMove[$tileIndexToMove]
+        );
+    }
 }
