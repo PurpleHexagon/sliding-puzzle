@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { moveBlock, startPuzzle,resetMoveCount } from '../modules/Puzzle'
+import { moveBlock, startPuzzle, resetMoveCount } from '../modules/Puzzle'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for

@@ -27,7 +27,7 @@ export const resetMoveCount = () => {
 }
 
 export const startPuzzle = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return axios.get('http://0.0.0.0:8080/start-puzzle')
     .then(function (response) {
       return dispatch({
@@ -65,12 +65,6 @@ export const moveBlock = (moveArray) => {
       console.log(error)
     })
   }
-}
-
-export const actions = {
-  resetMoveCount,
-  startPuzzle,
-  moveBlock
 }
 
 // ------------------------------------
