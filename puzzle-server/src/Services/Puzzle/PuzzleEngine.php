@@ -128,6 +128,8 @@ class PuzzleEngine
      */
     public function move(int $from, int $to): bool
     {
+        $this->isValidIndexForMove($from, $to);
+
         $move = $this->createMoveMatrix($from, $to);
         $newPuzzleMatrix = $this->puzzleMatrix->add($move);
         $this->ensureMoveValid($newPuzzleMatrix->getData());
@@ -291,6 +293,25 @@ class PuzzleEngine
                     __FUNCTION__
                 )
             );
+        }
+    }
+
+    /**
+     * Ensure the index is valid for the puzzle size
+     *
+     * @param int $from
+     * @param int $to
+     */
+    protected function isValidIndexForMove(int $from, int $to)
+    {
+        $indexes = range(1, $this->puzzleSize);
+
+        if (in_array($from, $indexes) === false) {
+            throw new RuntimeException("Move index is not valid");
+        }
+
+        if (in_array($to, $indexes) === false) {
+            throw new RuntimeException("Move index is not valid");
         }
     }
 

@@ -121,7 +121,7 @@ class PuzzleEngineTest extends TestCase
 
     /**
      * Given an instance of PuzzleEngine
-     * When move method is called with a valid to and from position 
+     * When move method is called with a valid to and from position
      * Then the tiles should switch place
      */
     public function testMoveToEmptyTileIsSuccessful()
@@ -145,5 +145,37 @@ class PuzzleEngineTest extends TestCase
             $tileNine,
             $tilesAfterMove[$tileIndexToMove]
         );
+    }
+
+    /**
+     * Given an instance of PuzzleEngine
+     * When move is called with bad indexes
+     * Then an Exception should be thrown
+     *
+     * TODO: improve checks for exception type and message
+     * @dataProvider badMovesProvider
+     * @param $from
+     * @param $to
+     */
+    public function testMoveThrowsExceptionWhenMoveIsInvalid($from, $to)
+    {
+        $this->expectException(\Exception::class);
+        $this->serviceUnderTest->move($from, $to);
+    }
+
+    /**
+     * @return array
+     */
+    public function badMovesProvider()
+    {
+        return [
+            [1, 9],
+            [9, 5],
+            [6, 1],
+            [3, 4],
+            [3, 3],
+            [9, 6],
+            [8, 11]
+        ];
     }
 }
