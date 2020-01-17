@@ -5,36 +5,22 @@ namespace Tests\Functional;
 class HomepageTest extends BaseTestCase
 {
     /**
-     * Test that the index route returns a rendered response containing the text 'SlimFramework' but not a greeting
+     * Test that start puzzle route returns a 200
      */
-    public function testGetHomepageWithoutName()
+    public function testGetStartPuzzle()
     {
-        $response = $this->runApp('GET', '/');
+        $response = $this->runApp('GET', '/start-puzzle');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('SlimFramework', (string)$response->getBody());
-        $this->assertNotContains('Hello', (string)$response->getBody());
     }
 
     /**
-     * Test that the index route with optional name argument returns a rendered greeting
+     * Test that the start puzzle route won't accept a post request
      */
-    public function testGetHomepageWithGreeting()
+    public function testPostStartPuzzleNotAllowed()
     {
-        $response = $this->runApp('GET', '/name');
+        $response = $this->runApp('POST', '/start-puzzle', ['test']);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('Hello name!', (string)$response->getBody());
-    }
-
-    /**
-     * Test that the index route won't accept a post request
-     */
-    public function testPostHomepageNotAllowed()
-    {
-        $response = $this->runApp('POST', '/', ['test']);
-
-        $this->assertEquals(405, $response->getStatusCode());
-        $this->assertContains('Method not allowed', (string)$response->getBody());
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }
