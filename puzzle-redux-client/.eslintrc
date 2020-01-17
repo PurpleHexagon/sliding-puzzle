@@ -7,10 +7,12 @@
   "plugins": [
     "babel",
     "react",
+    "mocha",
     "promise"
   ],
   "env": {
-    "browser" : true
+    "browser" : true,
+    "mocha": true
   },
   "globals": {
     "__DEV__"      : false,
