@@ -165,6 +165,15 @@ class PuzzleEngine
 
     /**
      * Returns false if the puzzle is not solvable
+     *
+     * Rules:
+     *
+     * If the grid width is odd, then the number of inversions in a solvable situation is even.
+     * If the grid width is even, and the blank is on an even row counting from the bottom (second-last, fourth-last etc), then the number of inversions in a solvable situation is odd.
+     * If the grid width is even, and the blank is on an odd row counting from the bottom (last, third-last, fifth-last etc) then the number of inversions in a solvable situation is even.
+     *
+     * Since the last tile is always the empty tile in this implementation rule two has not been implemented
+     *
      * @return bool
      */
     protected function ensurePuzzleIsSolvable()
@@ -185,6 +194,11 @@ class PuzzleEngine
 
     /**
      * Calculate inversions for current tiles
+     *
+     * An inversion is when a tile precedes another tile with a lower number on it.
+     *
+     * Total inversions is the count of all tiles with lower value for every tile
+     *
      * @return int|mixed
      */
     protected function calculateInversions()
