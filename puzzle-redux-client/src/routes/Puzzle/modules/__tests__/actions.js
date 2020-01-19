@@ -24,7 +24,11 @@ describe('actions', () => {
       return newState
     })
 
-    it('should reset the count', () => {
+    it('should call get', () => {
+      expect(axios.get).to.have.been.calledWith('http://0.0.0.0:8080/start-puzzle')
+    })
+
+    it('should call dispatch', () => {
       expect(dispatch).to.have.been.calledWith(
         {
           type: START_PUZZLE,

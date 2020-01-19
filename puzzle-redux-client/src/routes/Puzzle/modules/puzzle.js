@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { merge } from 'ramda'
+import appConfig from '../../../../app-config'
 
 // ------------------------------------
 // Constants
@@ -28,7 +29,7 @@ export const resetMoveCount = () => {
 
 export const startPuzzle = () => {
   return (dispatch) => {
-    return axios.get('http://0.0.0.0:8080/start-puzzle')
+    return axios.get(`${appConfig.appBaseUrl}/start-puzzle`)
     .then(function (response) {
       return dispatch({
         type    : START_PUZZLE,
@@ -42,7 +43,7 @@ export const moveBlock = (moveArray) => {
   return (dispatch, getState) => {
     const state = getState()
     return axios.post(
-      'http://0.0.0.0:8080/move',
+      `${appConfig.appBaseUrl}/move`,
       JSON.stringify({ moveArray, token: state.puzzle.token }),
       {
         headers: {
