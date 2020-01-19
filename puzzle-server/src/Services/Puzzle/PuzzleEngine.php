@@ -73,14 +73,13 @@ class PuzzleEngine
     {
         $this->ensureIsSquareGuard($puzzleSize);
         $this->tiles = $this->solution = range(1, $puzzleSize);
-        $this->shuffle();
+        $this->puzzleSize = $puzzleSize;
+        $this->dimension = (int) sqrt($puzzleSize);
 
+        $this->shuffle();
         while ($this->ensurePuzzleIsSolvable() === false) {
             $this->shuffle();
         }
-
-        $this->puzzleSize = $puzzleSize;
-        $this->dimension = (int) sqrt($puzzleSize);
 
         foreach (range(1, $this->dimension) as $x) {
             $puzzleRow = array_fill(0, $this->dimension, 1);
@@ -190,7 +189,7 @@ class PuzzleEngine
      */
     protected function calculateInversions()
     {
-        $inversion = 0;
+        $inversions = 0;
 
         foreach ($this->tiles as $outerTileIndex => $outerTile) {
             foreach ($this->tiles as $innerTileIndex => $innerTile) {
@@ -202,11 +201,11 @@ class PuzzleEngine
                     continue;
                 }
 
-                $inversion += 1;
+                $inversions += 1;
             }
         }
 
-        return $inversion;
+        return $inversions;
     }
 
     /**
