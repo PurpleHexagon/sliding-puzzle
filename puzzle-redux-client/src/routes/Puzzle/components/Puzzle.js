@@ -52,6 +52,10 @@ class Puzzle extends Component {
     this.setState({ runningTime: parseInt(Math.abs(new Date() - startedDate) / 1000, 10) })
   }
   render () {
+    if (this.props.isSolved === true) {
+      clearInterval(this.timer)
+    }
+
     const puzzleBlocks = []
     forEachObjIndexed((x, key) => {
       puzzleBlocks.push(
