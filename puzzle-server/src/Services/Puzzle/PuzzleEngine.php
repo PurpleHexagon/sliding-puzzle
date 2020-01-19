@@ -98,11 +98,14 @@ class PuzzleEngine
      */
     protected function shuffle()
     {
+        $finalTileValue = pow($this->dimension, 2);
+        $lastTileIndex = $finalTileValue - 1;
+
         shuffle($this->tiles);
-        $lastTile = $this->tiles[8];
+        $lastTile = $this->tiles[$lastTileIndex];
         $this->tiles = array_map(
-            function ($value) use ($lastTile) {
-                if ($value === 9) {
+            function ($value) use ($lastTile, $finalTileValue) {
+                if ($value === $finalTileValue) {
                     return $lastTile;
                 }
 
@@ -111,7 +114,7 @@ class PuzzleEngine
             $this->tiles
         );
 
-        $this->tiles[8] = 9;
+        $this->tiles[$lastTileIndex] = $finalTileValue;
     }
 
     /**
