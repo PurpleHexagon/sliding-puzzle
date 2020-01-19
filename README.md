@@ -28,6 +28,7 @@ Start React:
 - [x] Use JWT so more than one puzzle can be played at once
 - [x] Add timer
 - [x] Add complete message
+- [ ] Add check if the puzzle is solvable after shuffle
 - [ ] Design and styles
 - [ ] Create home screen
 - [ ] Create Tile component and move logic outside of component
