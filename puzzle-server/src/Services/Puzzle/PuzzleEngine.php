@@ -73,6 +73,31 @@ class PuzzleEngine
     {
         $this->ensureIsSquareGuard($puzzleSize);
         $this->tiles = $this->solution = range(1, $puzzleSize);
+        $this->shuffle();
+
+        while ($this->ensurePuzzleIsSolvable() === false) {
+            $this->shuffle();
+        }
+
+        $this->puzzleSize = $puzzleSize;
+        $this->dimension = (int) sqrt($puzzleSize);
+
+        foreach (range(1, $this->dimension) as $x) {
+            $puzzleRow = array_fill(0, $this->dimension, 1);
+            if ($x == $this->dimension) $puzzleRow[$x - 1] = 0;
+            $puzzleAsMultiDimensionalArray[] = $puzzleRow;
+        }
+
+        $this->puzzleMatrix = new NumArray(
+            $puzzleAsMultiDimensionalArray
+        );
+    }
+
+    /**
+     * Shuffle the tiles and set last tile to 9
+     */
+    protected function shuffle()
+    {
         shuffle($this->tiles);
         $lastTile = $this->tiles[8];
         $this->tiles = array_map(
@@ -87,19 +112,6 @@ class PuzzleEngine
         );
 
         $this->tiles[8] = 9;
-
-        $this->puzzleSize = $puzzleSize;
-        $this->dimension = (int) sqrt($puzzleSize);
-
-        foreach (range(1, $this->dimension) as $x) {
-            $puzzleRow = array_fill(0, $this->dimension, 1);
-            if ($x == $this->dimension) $puzzleRow[$x - 1] = 0;
-            $puzzleAsMultiDimensionalArray[] = $puzzleRow;
-        }
-
-        $this->puzzleMatrix = new NumArray(
-            $puzzleAsMultiDimensionalArray
-        );
     }
 
     /**
@@ -147,6 +159,51 @@ class PuzzleEngine
         }
 
         return $this->isSolved;
+    }
+
+    /**
+     * Returns false if the puzzle is not solvable
+     * @return bool
+     */
+    protected function ensurePuzzleIsSolvable()
+    {
+        $inversions = $this->calculateInversions();
+
+        if (($this->dimension % 2 !== 0) && ($inversions % 2 === 0)) {
+            return true;
+        }
+
+        if (($this->dimension % 2 === 0) && ($inversions % 2 === 0)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Calculate inversions for current tiles
+     * @return int|mixed
+     */
+    protected function calculateInversions()
+    {
+        $inversion = 0;
+
+        foreach ($this->tiles as $outerTileIndex => $outerTile) {
+            foreach ($this->tiles as $innerTileIndex => $innerTile) {
+                if ($innerTileIndex < $outerTileIndex) {
+                    continue;
+                }
+
+                if ($outerTile === $innerTile || $innerTile > $outerTile) {
+                    continue;
+                }
+
+                $inversion += 1;
+            }
+        }
+
+        return $inversion;
     }
 
     /**
