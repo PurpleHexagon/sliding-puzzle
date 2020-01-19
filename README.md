@@ -31,7 +31,7 @@ Start React:
 - [ ] Design and styles
 - [ ] Create home screen
 - [ ] Create Tile component and move logic outside of component
-- [ ] Add Unit Tests
+- [x] Add Unit Tests
 - [ ] Dockerize and write commands for managing
 - [ ] Add Score board
 - [ ] Allow for size of puzzle to be selected
