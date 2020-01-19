@@ -219,8 +219,8 @@ class PuzzleEngine
      *   0  0 -1
      *   0  0  1
      *
-     * @param  array    $from         A tile index to move from
-     * @param  array    $to           A tile index to move to
+     * @param  int      $from         A tile index to move from
+     * @param  int      $to           A tile index to move to
      * @return NumArray $moveMatrix   Move represented as matrix
      */
     protected function createMoveMatrix(int $from, int $to): NumArray
