@@ -93,7 +93,7 @@ class PuzzleEngine
     }
 
     /**
-     * Shuffle the tiles and set last tile to 9
+     * Shuffle the tiles and set last tile value to the final value for puzzle size, ie 9 for size 9 puzzle
      */
     protected function shuffle()
     {
