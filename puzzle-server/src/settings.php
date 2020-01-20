@@ -1,5 +1,7 @@
 <?php
-return [
+$localSettings = require_once 'local.settings.php';
+
+$settings = [
     'settings' => [
         "determineRouteBeforeAppMiddleware" => false,
         'displayErrorDetails' => false, // set to false in production
@@ -16,5 +18,8 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+        'jwtSigningKey' => ''
     ],
 ];
+
+return Laminas\Stdlib\ArrayUtils::merge($settings, $localSettings);

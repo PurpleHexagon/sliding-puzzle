@@ -30,6 +30,6 @@ $container['cache'] = function ($c) {
 };
 
 $container['jwt'] = function ($c) {
-    $jwtService = new \PurpleHexagon\Services\Auth\JwtService();
+    $jwtService = new \PurpleHexagon\Services\Auth\JwtService($c->get('settings')['jwtSigningKey']);
     return $jwtService;
 };

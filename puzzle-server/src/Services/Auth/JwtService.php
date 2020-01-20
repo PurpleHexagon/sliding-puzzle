@@ -12,9 +12,18 @@ use Ramsey\Uuid\UuidInterface;
 class JwtService
 {
     /**
-     * TODO: This needs to be moved to config and changed to a secure string with high entropy
+     * @var string
      */
-    const KEY = '689hjfkdsf893yb4k5j435843jngfdhg8e7tjtreog8er';
+    protected $signingKey;
+
+    /**
+     * JwtService constructor.
+     * @param string $signingKey
+     */
+    public function __construct(string $signingKey)
+    {
+        $this->signingKey = $signingKey;
+    }
 
     /**
      * @param UuidInterface $uuid
@@ -26,7 +35,7 @@ class JwtService
             'uuid' => $uuid
         ];
 
-        return JWT::encode($payload, self::KEY);
+        return JWT::encode($payload, $this->signingKey);
     }
 
     /**
@@ -35,6 +44,6 @@ class JwtService
      */
     public function decodeToken(string $token)
     {
-        return JWT::decode($token, self::KEY, ['HS256']);
+        return JWT::decode($token, $this->signingKey, ['HS256']);
     }
 }
